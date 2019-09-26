@@ -1,4 +1,4 @@
-
+#[derive(Debug)]
 struct Node {
     value: i32,
     next: Option<Box<Node>>,
@@ -10,6 +10,7 @@ impl Node {
     }
 }
 
+#[derive(Debug)]
 pub struct LinkedIntList {
     first: Option<Box<Node>>,
 }
@@ -21,7 +22,7 @@ impl LinkedIntList {
     }
 
     pub fn push(&mut self, value: i32){
-        let old_first = self.first;
-        self.first = Some(Box(Node::new(value, old_first)));
+        let old_first = self.first.take();
+        self.first = Some(Box::new(Node::new(value, old_first)));
     }
 }
